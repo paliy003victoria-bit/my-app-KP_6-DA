@@ -33,7 +33,7 @@ st.set_page_config(
 
 st.sidebar.title("Панель фільтрації")
 
-selected_artist_name = st.sidebar.selectbox("Виконавець", sorted(df["artist_name"].unique()))
+selected_artist_name = st.sidebar.multiselect("Виконавець", df["artist_name"].unique(), default=df["artist_name"].unique())
 selected_genre = st.sidebar.multiselect("Жанр", df["genre"].unique(), default=df["genre"].unique())
 selected_country = st.sidebar.multiselect("Країна", df["country"].unique(), default=df["country"].unique())
 selected_longevity = st.sidebar.radio("Завантаження треку", df["longevity"].unique())
@@ -47,7 +47,7 @@ selected_max_streams = st.sidebar.slider(
 )
 
 df_filtered = df[
-    (df["artist_name"] == selected_artist_name) &
+    (df["artist_name"].isin(selected_artist_name)) &
     (df["genre"].isin(selected_genre)) &
     (df["country"].isin(selected_country)) &
     (df["longevity"] == selected_longevity) &
