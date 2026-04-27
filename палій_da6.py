@@ -33,7 +33,7 @@ st.set_page_config(
 
 st.sidebar.title("Панель фільтрації")
 
-selected_artist_name = st.sidebar.selectbox("Виконавець", sorted(df["artist_name"].unique()))
+selected_artist_name = st.sidebar.multiselect("Виконавець", df["artist_name"].unique(), default=df["artist_name"].unique()[:5])
 selected_genre = st.sidebar.multiselect("Жанр", df["genre"].unique(), default=df["genre"].unique())
 selected_country = st.sidebar.multiselect("Країна", df["country"].unique(), default=df["country"].unique())
 selected_longevity = st.sidebar.radio("Завантаження треку", df["longevity"].unique())
@@ -98,6 +98,11 @@ if selected_columns:
 else:
     st.info("Оберіть хоча б один стовпець, щоб побачити таблицю.")
 
+if df_filtered.empty:
+    st.error("За вашими фільтрами даних не знайдено. Будь ласка, змініть параметри у бічній панелі.")
+else:
+    st.write(f"Знайдено записів: {len(df_filtered)}")
+    
 if chart_option == "Дні vs Прослуховування":
     st.subheader("Дні vs Прослуховування")
     chart = alt.Chart(df_filtered).mark_circle(size=100).encode(
