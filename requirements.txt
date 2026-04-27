@@ -1,0 +1,9 @@
+streamlit
+pandas
+matplotlib.pyplot
+seaborn
+altair
+numpy
+plotly.express
+from sklearn.linear_model import LinearRegression
+from sklearn.cluster import KMeans
