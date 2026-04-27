@@ -97,11 +97,6 @@ if selected_columns:
     st.dataframe(df_filtered[selected_columns])
 else:
     st.info("Оберіть хоча б один стовпець, щоб побачити таблицю.")
-
-if df_filtered.empty:
-    st.error("За вашими фільтрами даних не знайдено. Будь ласка, змініть параметри у бічній панелі.")
-else:
-    st.write(f"Знайдено записів: {len(df_filtered)}")
     
 if chart_option == "Дні vs Прослуховування":
     st.subheader("Дні vs Прослуховування")
