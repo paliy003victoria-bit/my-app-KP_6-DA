@@ -19,8 +19,6 @@ import streamlit as st
 
 df = pd.read_csv('spotify_global_trends.csv')
 
-!pip install streamlit
-
 st.set_page_config(
     page_title="Топ-200 Spotify",
     page_icon="🎶",
