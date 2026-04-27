@@ -19,6 +19,8 @@ import streamlit as st
 
 df = pd.read_csv('spotify_global_trends.csv')
 
+!pip install streamlit
+
 st.set_page_config(
     page_title="Топ-200 Spotify",
     page_icon="🎶",
@@ -33,7 +35,7 @@ st.set_page_config(
 
 st.sidebar.title("Панель фільтрації")
 
-selected_artist_name = st.sidebar.multiselect("Виконавець", df["artist_name"].unique(), default=df["artist_name"].unique()[:5])
+selected_artist_name = st.sidebar.selectbox("Виконавець", sorted(df["artist_name"].unique()))
 selected_genre = st.sidebar.multiselect("Жанр", df["genre"].unique(), default=df["genre"].unique())
 selected_country = st.sidebar.multiselect("Країна", df["country"].unique(), default=df["country"].unique())
 selected_longevity = st.sidebar.radio("Завантаження треку", df["longevity"].unique())
@@ -97,7 +99,7 @@ if selected_columns:
     st.dataframe(df_filtered[selected_columns])
 else:
     st.info("Оберіть хоча б один стовпець, щоб побачити таблицю.")
-    
+
 if chart_option == "Дні vs Прослуховування":
     st.subheader("Дні vs Прослуховування")
     chart = alt.Chart(df_filtered).mark_circle(size=100).encode(
